@@ -1,0 +1,19 @@
+# /etc/systemd/system/cncli-sendslots.service
+[Unit]
+Description                   =CNCLI Sendslots
+After                         =network-online.target
+[Service]
+ExecStart                     =/usr/local/bin/cncli sendslots --byron-genesis /home/cardano/cnode/mainnet-byron-genesis.json --shelley-genesis /home/cardano/cnode/mainnet-shelley-genesis.json  --db /home/cardano/cnode/scripts/cncli.db --config /home/cardano/cnode/scripts/pooltool.json
+KillSignal                    =SIGINT
+LimitNOFILE                   =32768
+Restart                       =always
+RestartKillSignal             =SIGINT
+RestartSec                    =600
+TimeoutStopSec                =300
+SyslogIdentifier              =cncli-slots
+Type                          =simple
+User                          =cardano
+WorkingDirectory              =/home/cardano/cnode
+[Install]
+WantedBy                      =multi-user.target
+
