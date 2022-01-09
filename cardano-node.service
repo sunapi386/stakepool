@@ -1,0 +1,20 @@
+# The Cardano node service (part of systemd)
+# file: /etc/systemd/system/cardano-node.service 
+[Unit]
+Description     = Cardano node service
+Wants           = network-online.target
+After           = network-online.target 
+[Service]
+User            = cardano
+Type            = simple
+WorkingDirectory= /home/cardano/cnode
+ExecStart       = /home/cardano/cnode/startBlockProducingNode1.fish
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+TimeoutStopSec=300
+LimitNOFILE=32768
+Restart=always
+RestartSec=5
+SyslogIdentifier=cardano-node
+[Install]
+WantedBy  = multi-user.target
