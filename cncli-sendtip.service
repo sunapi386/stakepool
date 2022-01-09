@@ -1,0 +1,18 @@
+# /etc/systemd/system/cncli-sendtip.service 
+[Unit]
+Description                   =CNCLI Sendtip
+After                         =network-online.target
+[Service]
+ExecStart                     =/usr/local/bin/cncli sendtip --cardano-node /usr/local/bin/cardano-node --config /home/cardano/cnode/scripts/pooltool.json
+KillSignal                    =SIGINT
+LimitNOFILE                   =32768
+Restart                       =always
+RestartKillSignal             =SIGINT
+RestartSec                    =600
+TimeoutStopSec                =300
+SyslogIdentifier              =cncli-sendtip
+Type                          =simple
+User                          =cardano
+WorkingDirectory              =/home/cardano/cnode
+[Install]
+WantedBy                      =multi-user.target
