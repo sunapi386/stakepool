@@ -1,0 +1,18 @@
+# /etc/systemd/system/cncli-sync.service
+[Unit]
+Description                   =CNCLI Sync
+After                         =network-online.target
+[Service]
+ExecStart                     =/usr/local/bin/cncli sync --host 127.0.0.1 --port 6000 --db /home/cardano/cnode/scripts/cncli.db
+KillSignal                    =SIGINT
+LimitNOFILE                   =32768
+Restart                       =always
+RestartKillSignal             =SIGINT
+RestartSec                    =5
+TimeoutStopSec                =300
+SyslogIdentifier              =cncli-sync
+Type                          =simple
+User                          =cardano
+WorkingDirectory              =/home/cardano/cnode
+[Install]
+WantedBy                      =multi-user.target
