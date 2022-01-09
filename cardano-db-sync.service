@@ -1,0 +1,24 @@
+# /etc/systemd/system/cardano-db-sync.service
+[Unit]
+Description                   =Cardano DB Sync follows the Cardano chain and take information from the chain and an internally maintained copy of ledger state. Data is then extracted from the chain and inserted into a PostgreSQL database. 
+After                         =network-online.target
+[Service]
+Environment                   =PGPASSFILE=/home/cardano/workspace/cardano-db-sync/config/pgpass 
+ExecStart                     =/home/cardano/workspace/cardano-db-sync/db-sync-node/bin/cardano-db-sync \
+  --config /home/cardano/workspace/cardano-db-sync/config/mainnet-config.yaml \
+  --socket-path /home/cardano/cnode/db/socket \
+  --state-dir /home/cardano/workspace/cardano-db-sync/ledger-state/mainnet \
+  --schema-dir /home/cardano/workspace/cardano-db-sync/schema/
+KillSignal                    =SIGINT
+LimitNOFILE                   =32768
+Restart                       =always
+RestartKillSignal             =SIGINT
+RestartSec                    =5
+TimeoutStopSec                =300
+SyslogIdentifier              =cardano-db-sync
+Type                          =simple
+User                          =cardano
+WorkingDirectory              =/home/cardano/workspace/cardano-db-sync
+[Install]
+WantedBy                      =multi-user.target
+
