@@ -36,8 +36,7 @@ MemorySwapMax                          =0
 # Ideally, we'd be a bit smarter about this but there's no good way to do that without hooking
 # systemd dependencies deeper into go-ipfs.
 
-Environment                            =IPFS_PATH="${HOME}"
-ExecStart                              =/usr/local/bin/ipfs daemon --init --migrate
+ExecStart                              =/usr/local/bin/ipfs daemon --init #  --init-config /home/ipfs/.ipfs/config
 Group                                  =ipfs
 KillSignal                             =SIGINT
 Restart                                =always
