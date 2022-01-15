@@ -1,5 +1,5 @@
 # stakepool
 
 ## users
-Some services run as `cardano` and some as `ipfs`. 
-Make sure to `adduser`.
+Services can run as these users: `cardano`, `ipfs`, `arweave`. 
+Make sure to `adduser` and create them.
