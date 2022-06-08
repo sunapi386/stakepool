@@ -1,0 +1,17 @@
+# /etc/systemd/system/pgweb-dbsync.service
+[Unit]
+Description                   =PG Web interface for dbsync
+After                         =network-online.target
+[Service]
+ExecStart                     =/home/cardano/downloads/pgweb_linux_amd64 --bind 0.0.0.0 --url postgresql://cardano:CHANGE_THIS_PASSWORD@localhost:5432/dbsync
+KillSignal                    =SIGINT
+Restart                       =always
+RestartKillSignal             =SIGINT
+RestartSec                    =5
+TimeoutStopSec                =300
+SyslogIdentifier              =pgweb-dbsync
+Type                          =simple
+User                          =cardano
+[Install]
+WantedBy                      =multi-user.target
+
